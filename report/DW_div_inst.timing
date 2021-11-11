@@ -1,0 +1,100 @@
+Information: Updating design information... (UID-85)
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : DW_div_inst
+Version: K-2015.06-SP5-5
+Date   : Sat Oct  2 11:32:48 2021
+****************************************
+
+Operating Conditions: typical   Library: gscl45nm
+Wire Load Model Mode: top
+
+  Startpoint: di_B[0] (input port)
+  Endpoint: remainder_b[0]
+            (output port)
+  Path Group: default
+  Path Type: max
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  input external delay                                    0.00       0.00 f
+  di_B[0] (in)                                            0.00       0.00 f
+  DW_div_1/b[0] (DW_div_inst_DW_div_6)                    0.00       0.00 f
+  DW_div_1/U61/Y (INVX1)                                  0.18       0.18 r
+  DW_div_1/U9/Y (OR2X1)                                   0.06       0.25 r
+  DW_div_1/U103/Y (NAND3X1)                               0.02       0.26 f
+  DW_div_1/U6/Y (BUFX2)                                   0.03       0.30 f
+  DW_div_1/U69/Y (INVX1)                                  0.00       0.30 r
+  DW_div_1/U102/Y (MUX2X1)                                0.05       0.35 r
+  DW_div_1/U21/Y (INVX1)                                  0.04       0.39 f
+  DW_div_1/u_fa_PartRem_0_6_1/YC (FAX1)                   0.08       0.47 f
+  DW_div_1/U110/Y (NAND3X1)                               0.03       0.50 r
+  DW_div_1/U5/Y (BUFX2)                                   0.03       0.54 r
+  DW_div_1/U54/Y (INVX1)                                  0.03       0.56 f
+  DW_div_1/U109/Y (MUX2X1)                                0.05       0.61 r
+  DW_div_1/U15/Y (INVX1)                                  0.04       0.66 f
+  DW_div_1/u_fa_PartRem_0_5_1/YC (FAX1)                   0.09       0.75 f
+  DW_div_1/u_fa_PartRem_0_5_2/YC (FAX1)                   0.07       0.82 f
+  DW_div_1/U53/Y (AND2X1)                                 0.05       0.87 f
+  DW_div_1/U115/Y (MUX2X1)                                0.05       0.92 r
+  DW_div_1/U16/Y (INVX1)                                  0.04       0.97 f
+  DW_div_1/u_fa_PartRem_0_4_1/YC (FAX1)                   0.09       1.06 f
+  DW_div_1/u_fa_PartRem_0_4_2/YC (FAX1)                   0.08       1.14 f
+  DW_div_1/u_fa_PartRem_0_4_3/YC (FAX1)                   0.07       1.21 f
+  DW_div_1/U42/Y (AND2X1)                                 0.06       1.27 f
+  DW_div_1/U119/Y (MUX2X1)                                0.05       1.32 r
+  DW_div_1/U20/Y (INVX1)                                  0.04       1.37 f
+  DW_div_1/u_fa_PartRem_0_3_1/YC (FAX1)                   0.09       1.46 f
+  DW_div_1/u_fa_PartRem_0_3_2/YC (FAX1)                   0.08       1.54 f
+  DW_div_1/u_fa_PartRem_0_3_3/YC (FAX1)                   0.08       1.62 f
+  DW_div_1/u_fa_PartRem_0_3_4/YC (FAX1)                   0.07       1.69 f
+  DW_div_1/U3/Y (AND2X1)                                  0.08       1.77 f
+  DW_div_1/U122/Y (MUX2X1)                                0.05       1.83 r
+  DW_div_1/U17/Y (INVX1)                                  0.04       1.87 f
+  DW_div_1/u_fa_PartRem_0_2_1/YC (FAX1)                   0.09       1.96 f
+  DW_div_1/u_fa_PartRem_0_2_2/YC (FAX1)                   0.08       2.04 f
+  DW_div_1/u_fa_PartRem_0_2_3/YC (FAX1)                   0.08       2.12 f
+  DW_div_1/u_fa_PartRem_0_2_4/YC (FAX1)                   0.08       2.21 f
+  DW_div_1/u_fa_PartRem_0_2_5/YC (FAX1)                   0.07       2.28 f
+  DW_div_1/U25/Y (AND2X1)                                 0.08       2.35 f
+  DW_div_1/U124/Y (MUX2X1)                                0.06       2.41 r
+  DW_div_1/U18/Y (INVX1)                                  0.04       2.45 f
+  DW_div_1/u_fa_PartRem_0_1_1/YC (FAX1)                   0.09       2.54 f
+  DW_div_1/u_fa_PartRem_0_1_2/YC (FAX1)                   0.08       2.63 f
+  DW_div_1/u_fa_PartRem_0_1_3/YC (FAX1)                   0.08       2.71 f
+  DW_div_1/u_fa_PartRem_0_1_4/YC (FAX1)                   0.08       2.79 f
+  DW_div_1/u_fa_PartRem_0_1_5/YC (FAX1)                   0.08       2.87 f
+  DW_div_1/u_fa_PartRem_0_1_6/YC (FAX1)                   0.07       2.94 f
+  DW_div_1/U75/Y (INVX1)                                  0.00       2.94 r
+  DW_div_1/U74/Y (OR2X1)                                  0.05       2.99 r
+  DW_div_1/U73/Y (INVX1)                                  0.07       3.06 f
+  DW_div_1/U125/Y (MUX2X1)                                0.06       3.12 r
+  DW_div_1/U19/Y (INVX1)                                  0.04       3.16 f
+  DW_div_1/u_fa_PartRem_0_0_1/YC (FAX1)                   0.09       3.25 f
+  DW_div_1/u_fa_PartRem_0_0_2/YC (FAX1)                   0.08       3.33 f
+  DW_div_1/u_fa_PartRem_0_0_3/YC (FAX1)                   0.08       3.41 f
+  DW_div_1/u_fa_PartRem_0_0_4/YC (FAX1)                   0.08       3.50 f
+  DW_div_1/u_fa_PartRem_0_0_5/YC (FAX1)                   0.08       3.58 f
+  DW_div_1/u_fa_PartRem_0_0_6/YC (FAX1)                   0.08       3.66 f
+  DW_div_1/u_fa_PartRem_0_0_7/YC (FAX1)                   0.13       3.79 f
+  DW_div_1/U95/Y (MUX2X1)                                 0.05       3.84 r
+  DW_div_1/U70/Y (INVX1)                                  0.02       3.86 f
+  DW_div_1/remainder[0] (DW_div_inst_DW_div_6)            0.00       3.86 f
+  remainder_b[0] (out)                                    0.00       3.86 f
+  data arrival time                                                  3.86
+
+  max_delay                                               5.00       5.00
+  output external delay                                   0.00       5.00
+  data required time                                                 5.00
+  --------------------------------------------------------------------------
+  data required time                                                 5.00
+  data arrival time                                                 -3.86
+  --------------------------------------------------------------------------
+  slack (MET)                                                        1.14
+
+
+1

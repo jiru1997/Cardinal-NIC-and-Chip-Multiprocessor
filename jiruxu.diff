@@ -1,0 +1,14 @@
+Running Test # 0 
+diff --brief --ignore-all-space /home/viterbi/01/jiruxu/ee577b/cmp/test_cases/expected_dmem_0.0.dump cmp_test.dmem0.dump
+diff --brief --ignore-all-space /home/viterbi/01/jiruxu/ee577b/cmp/test_cases/expected_dmem_0.1.dump cmp_test.dmem1.dump
+diff --brief --ignore-all-space /home/viterbi/01/jiruxu/ee577b/cmp/test_cases/expected_dmem_0.2.dump cmp_test.dmem2.dump
+Files /home/viterbi/01/jiruxu/ee577b/cmp/test_cases/expected_dmem_0.2.dump and cmp_test.dmem2.dump differ
+7,8c7,8
+< Memory location #          6 : 4000000300000cc2 
+< Memory location #          7 : c000000000000ccc 
+---
+> Memory location #          6 : c000000000000ccc 
+> Memory location #          7 : 4000000300000cc2 
+diff --brief --ignore-all-space /home/viterbi/01/jiruxu/ee577b/cmp/test_cases/expected_dmem_0.3.dump cmp_test.dmem3.dump
+ 
+ 
