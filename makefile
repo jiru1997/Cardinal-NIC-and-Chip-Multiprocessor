@@ -1,4 +1,5 @@
 ###########################################################################
+#             UPDATED FOR EE577B Lab3 2020 Fall                           #
 # This is a general purpose makefile to compile and run                   #
 # Cadence NCSIM simulations                                               #
 #                                                                         #
@@ -13,6 +14,13 @@
 # To run simulation in gui mode                                           #
 # -----------------------------                                           #
 # %> make simg                                                            #
+#
+# To run synthesis                                                        #
+# -----------------------------                                           #
+# %> make syn                                                             #
+# TO use another TOP module name via commandline, you can use             #
+# make TOP=<NewTopModuleName> sim                                         #
+# make TOP=<NewTopModuleName> simg                                        #
 #                                                                         #
 # Directory Stucture                                                      #
 # ------------------                                                      #
@@ -22,85 +30,75 @@
 # ./work    -- Cadence work library to compile the design                 #
 # ./design  -- holds all design verilog files                             #
 # ./tb      -- holds testbench file(s)                                    #
+# ./netlist -- netlists generated from synthesis/Place Route              #
+# ./include -- files included in the verilog files using include command  #
 # ./scripts -- holds tcl run scripts for simulation control               #
-# ./reports -- keep all required log output/ pdfs files in this directory #
-# ./include -- All other files required for simulations                   #
+# ./reports -- holds all the reports from simulation                      #
+#                                                                         #
 ###########################################################################
 #                                                                          
-# Setup environment variables to point the Cadence instal directories
-# and license files etc                                               
-# source ~ee577/vlsi_tools.csh                    
+# Setup environment variables to point the Cadence instal directories      
+# and license files etc                                                      
 
-# Setting 'TOP' variable
-###########################################################################
-#
-# Processor Makefile
-#
-###########################################################################
 
-# Top module of CPU
+# top level module
 TOP = tb_cmp
+TOP_SYN = tb_cmp_syn
+TOP_PNR = tb_cmp_pnr
+DESIGN_NAME = cardinal_cmp
+
 
 # List of the design files
 DESIGN_FILES = ./design/*.v
-#DESIGN_FILES = ./netlist/cardinal_cmp.vo.v
+NETLIST_FILES = ./netlist/*.v
+PNR_FILE = ./pnr/*.v
 
 # List of the testbench files
 TB_FILES = ./tb/*.v
 
 INCLUDE_DIRECTORY = ./include
 
-## Include Synopsys DesignWare Library
 INCLUDE_DW_DIR = ./include/sim_ver
 
-# GUI simulation script file
+# GUI simulation script file for pre-synthesis design
 SIM_SCRIPT_FILE_GUI = ./scripts/runscript.tcl
 
-# Non GUI simulation script file
+# GUI simulation script file for post-synthesis design
+SIM_SYN_SCRIPT_FILE_GUI = ./scripts/runscript_syn.tcl
+
+# Non GUI simulation script file for pre-synthesis design
 SIM_SCRIPT_FILE_NO_GUI = ./scripts/runscript_nogui.tcl
+
+# Non GUI simulation script file for post-synthesis design
+SIM_SYN_SCRIPT_FILE_NO_GUI = ./scripts/runscript_syn_nogui.tcl
+
+# Non GUI simulation script file for PnR
+SIM_PNR_SCRIPT_FILE_GUI = ./scripts/runscript_pnr.tcl
+
+# Non GUI simulation script file for PnR
+SIM_PNR_SCRIPT_FILE_NO_GUI = ./scripts/runscript_pnr_nogui.tcl
+
 
 # ncvlog switch 
 NCVLOG_SWITCHES = \
-	-64BIT \
 	-STATUS \
+	-MESSAGES \
 	-UPDATE \
-	-incdir $(INCLUDE_DIRECTORY)
-
-#	-MESSAGES \
-##	-incdir $(INCLUDE_DW_DIR)
+	-INCDIR $(INCLUDE_DIRECTORY)
 
 #ncelab switches
 NCELAB_SWITCHES = \
-	-64BIT \
 	-ACCESS +rwc \
 	-NCFATAL INVSUP \
 	-NCFATAL CUNOTB \
 	-ERRORMAX 5 \
 	-UPDATE \
+	-MESSAGES \
 	-TIMESCALE '1ns/10ps' \
-	-NOLOG
-
-#	-MESSAGES
-#	-LIBVERBOSE
+	-LIBVERBOSE
 
 # ncsim simulation switches for console simulation
 NCSIM_SWITCHES_NO_GUI = \
-	-64BIT \
-	-STATUS \
-	-NOCOPYRIGHT \
-	-MESSAGES \
-	-NCFATAL INVSUP \
-	-NOWARN DLBRLK \
-	-NOLOG \
-	-NOKEY
-
-#	-SDF_NO_WARNINGS \
-#	-TCL \
-#	-INPUT $(SIM_SCRIPT_FILE_NO_GUI)
-
-# ncsim switches for GUI simulations
-NCSIM_SWITCHES_GUI = \
-	-64BIT \
 	-STATUS \
 	-NOCOPYRIGHT \
 	-MESSAGES \
@@ -109,41 +107,135 @@ NCSIM_SWITCHES_GUI = \
 	-TCL \
 	-NOLOG \
 	-NOKEY \
+	-INPUT $(SIM_SCRIPT_FILE_NO_GUI)
+
+# ncsim synthesis design simulation switches for console simulation
+NCSIM_SWITCHES_NO_GUI_SYN = \
+	-STATUS \
+	-NOCOPYRIGHT \
+	-MESSAGES \
+	-NCFATAL INVSUP \
+	-NOWARN DLBRLK \
+	-TCL \
+	-NOLOG \
+	-NOKEY \
+	-INPUT $(SIM_SYN_SCRIPT_FILE_NO_GUI)
+
+# ncsim pnr simulation switches for console simulation
+NCSIM_SWITCHES_NO_GUI_PNR = \
+	-STATUS \
+	-NOCOPYRIGHT \
+	-MESSAGES \
+	-NCFATAL INVSUP \
+	-NOWARN DLBRLK \
+	-TCL \
+	-NOLOG \
+	-NOKEY \
+	-INPUT $(SIM_PNR_SCRIPT_FILE_NO_GUI) 
+
+# ncsim switches for GUI simulations
+NCSIM_SWITCHES_GUI = \
+	-STATUS \
+	-NOCOPYRIGHT \
+	-MESSAGES \
+	-NCFATAL INVSUP \
+	-NOWARN DLBRLK \
+	-TCL \
+	-NOLOG \
+	-NOKEY \
+	-INPUT $(SIM_SCRIPT_FILE_GUI) \
 	-GUI
 
-#	-INPUT $(SIM_SCRIPT_FILE_GUI) \
+# ncsim synthesis design switches for GUI simulations
+NCSIM_SWITCHES_GUI_SYN = \
+	-STATUS \
+	-NOCOPYRIGHT \
+	-MESSAGES \
+	-NCFATAL INVSUP \
+	-NOWARN DLBRLK \
+	-TCL \
+	-NOLOG \
+	-NOKEY \
+	-INPUT $(SIM_SYN_SCRIPT_FILE_GUI) \
+	-GUI
 
-all : elab~
+# ncsim pnr switches for GUI simulations
+NCSIM_SWITCHES_GUI_PNR = \
+	-STATUS \
+	-NOCOPYRIGHT \
+	-MESSAGES \
+	-NCFATAL INVSUP \
+	-NOWARN DLBRLK \
+	-TCL \
+	-NOLOG \
+	-NOKEY \
+	-INPUT $(SIM_PNR_SCRIPT_FILE_GUI) \
+	-GUI
+
+export
+
+all : clean elab~ sim
 
 # analyze all the design and testbench files
-ana~ : clean $(DESIGN_FILES)
+ana~ : $(DESIGN_FILES)
 	for f in $(DESIGN_FILES); do ncvlog $(NCVLOG_SWITCHES) -work work $$f ; done
 	for f in $(TB_FILES);     do ncvlog $(NCVLOG_SWITCHES) -work work $$f ; done
 	@touch ana~
+
+ana_syn~ : $(NETLIST_FILES)
+	for f in $(NETLIST_FILES); do ncvlog $(NCVLOG_SWITCHES) -work work $$f ; done
+	for f in $(TB_FILES);     do ncvlog $(NCVLOG_SWITCHES) -work work $$f ; done
+	@touch ana_syn~
+
+ana_pnr~ : $(PNR_FILE)
+	ncvlog $(NCVLOG_SWITCHES) -work work $(PNR_FILE)
+	ncvlog $(NCVLOG_SWITCHES) -work work ./tb/$(TOP_PNR).v
+	@touch ana_pnr~
 
 # elaborate the top module
 elab~ : ana~
 	ncelab $(NCELAB_SWITCHES) work.$(TOP)
 	@touch elab~
 
+elab_syn~ : ana_syn~
+	ncelab $(NCELAB_SWITCHES) work.$(TOP_SYN)
+	@touch elab_syn~
+
+elab_pnr~ : ana_pnr~
+	ncelab $(NCELAB_SWITCHES) work.$(TOP_PNR)
+	@touch elab_pnr~
+
 # run simulation without gui
-sim : ana~ elab~
+sim : clean elab~
 	ncsim $(NCSIM_SWITCHES_NO_GUI) work.$(TOP)
+
+sim_syn : clean elab_syn~
+	ncsim $(NCSIM_SWITCHES_NO_GUI_SYN) work.$(TOP_SYN)
+
+sim_pnr : clean elab_pnr~
+	ncsim $(NCSIM_SWITCHES_NO_GUI_PNR) work.$(TOP_PNR)
 
 # run simulation with gui
-simg : elab~
+simg : clean elab~
 	ncsim $(NCSIM_SWITCHES_GUI) work.$(TOP)
 
-# Just run the simulations without building
-run : 
-	ncsim $(NCSIM_SWITCHES_NO_GUI) work.$(TOP)
+simg_syn : clean elab_syn~
+	ncsim $(NCSIM_SWITCHES_GUI_SYN) work.$(TOP_SYN)
+
+simg_pnr : clean elab_pnr~
+	ncsim $(NCSIM_SWITCHES_GUI_PNR) work.$(TOP_PNR)
+
+# synthesis design
+syn:
+	dc_shell -f scripts/syn.tcl -output_log_file dc.log
 
 # clean the library to have a clean start
 clean :
 	@rm -rf `find . -name '*~'`
-	@rm -rf work INCA_*
+	@rm -rf work waves.shm 
 	@rm -rf ncsim*
-	@rm -rf *.log *.mr *.pvl *.syn *.svf
+	@rm -rf *.log
+	@rm -f default.svf
 	@mkdir work
 	@echo 'All set for a clean start'
 
@@ -152,8 +244,12 @@ dir :
 	@mkdir work
 	@mkdir design
 	@mkdir tb
+	@mkdir include
 	@mkdir scripts
-	@mkdir reports
+	@mkdir netlist
+	@mkdir report
+	@mkdir src
+	@mkdir pnr
 	@echo 'Directory structure for simulation is created'
 
 # create the basic cds.lib file
@@ -164,8 +260,7 @@ cds.lib :
 hdl.var :
 	@echo '# Hello Cadence' > hdl.var
 
-# create cds.lib hdl.var and work dir for simulation - setup for simulation
-init :	cds.lib hdl.var
-	@mkdir work
-	@echo 'Created work/ cds.lib hdl.var for simulation'
+init : dir cds.lib hdl.var
+	@touch AUTHORS
+	@echo 'Initialized the directory for simulation'
 
