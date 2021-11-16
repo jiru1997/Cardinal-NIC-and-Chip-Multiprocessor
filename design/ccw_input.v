@@ -263,7 +263,6 @@ module ccw_input(ccwsi, ccwri, ccwdi,
 							request_pe_even = 0;
 							request_ccw_even = 1;
 						end
-						ccwri_even = 0;
 					end else begin
 						//enable_pe_even = 0;
 						request_pe_even = 0;

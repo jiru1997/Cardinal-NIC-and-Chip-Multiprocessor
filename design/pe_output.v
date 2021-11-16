@@ -161,9 +161,9 @@ module pe_output(peso, pero, pedo,
 				end
 			STATE1 : //For cw channel, enable data transfer from input buffer to output buffer and assert grant signal to indicate output buffer got data
 				begin
-					enable1_cw_even = pero ? 1 : 0;
+					enable1_cw_even = (pero == 1'b1) ? 1'b1 : 1'b0;
 					enable2_cw_even = 0;
-					grant_cw_even = pero ? 1 : 0;
+					grant_cw_even = (pero == 1'b1) ? 1'b1 : 1'b0;
 					enable1_ccw_even = 0;
 					enable2_ccw_even = 0;
 					grant_ccw_even = 0;
@@ -185,9 +185,9 @@ module pe_output(peso, pero, pedo,
 					enable1_cw_even = 0;
 					enable2_cw_even = 0;
 					grant_cw_even = 0;
-					enable1_ccw_even = pero ? 1 : 0;
+					enable1_ccw_even = (pero == 1'b1) ? 1'b1 : 1'b0;
 					enable2_ccw_even = 0;
-					grant_ccw_even = pero ? 1 : 0;
+					grant_ccw_even = (pero == 1'b1) ? 1'b1 : 1'b0;
 					if (request_cw_even & request_ccw_even) arbi = ~arbi; //Flip arbi signal to change the priority
 					else arbi = arbi;
 				end
@@ -264,9 +264,9 @@ module pe_output(peso, pero, pedo,
 				end
 			STATE1 : //For cw channel, enable data transfer from input buffer to output buffer and assert grant signal to indicate output buffer got data
 				begin
-					enable1_cw_odd = pero ? 1 : 0;
+					enable1_cw_odd = (pero == 1'b1) ? 1'b1 : 1'b0;
 					enable2_cw_odd = 0;
-					grant_cw_odd = pero ? 1 : 0;
+					grant_cw_odd = (pero == 1'b1) ? 1'b1 : 1'b0;
 					enable1_ccw_odd = 0;
 					enable2_ccw_odd = 0;
 					grant_ccw_odd = 0;
@@ -288,9 +288,9 @@ module pe_output(peso, pero, pedo,
 					enable1_cw_odd = 0;
 					enable2_cw_odd = 0;
 					grant_cw_odd = 0;
-					enable1_ccw_odd = pero ? 1 : 0;
+					enable1_ccw_odd = (pero == 1'b1) ? 1'b1 : 1'b0;
 					enable2_ccw_odd = 0;
-					grant_ccw_odd = pero ? 1 : 0;
+					grant_ccw_odd = (pero == 1'b1) ? 1'b1 : 1'b0;
 					if (request_cw_odd & request_ccw_odd) arbi = ~arbi; //Flip arbi signal to change the priority
 					else arbi = arbi;
 				end

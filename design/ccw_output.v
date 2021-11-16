@@ -163,9 +163,9 @@ module ccw_output(ccwso, ccwro, ccwdo,
 				end
 			STATE1 : //For ccw channel, enable data transfer from input buffer to output buffer and assert grant signal to indicate output buffer got data
 				begin
-					enable1_ccw_even = ccwro ? 1:0;
+					enable1_ccw_even = (ccwro == 1'b1) ? 1'b1 : 1'b0;
 					enable2_ccw_even = 0;
-					grant_ccw_even = ccwro ? 1:0;
+					grant_ccw_even = (ccwro == 1'b1) ? 1'b1 : 1'b0;
 					enable1_pe_even = 0;
 					enable2_pe_even = 0;
 					grant_pe_even = 0;
@@ -187,9 +187,9 @@ module ccw_output(ccwso, ccwro, ccwdo,
 					enable1_ccw_even = 0;
 					enable2_ccw_even = 0;
 					grant_ccw_even = 0;
-					enable1_pe_even = ccwro ? 1:0;
+					enable1_pe_even = (ccwro == 1'b1) ? 1'b1 : 1'b0;
 					enable2_pe_even = 0;
-					grant_pe_even = ccwro ? 1:0;
+					grant_pe_even = (ccwro == 1'b1) ? 1'b1 : 1'b0;
 					if (request_ccw_even & request_pe_even) arbi = ~arbi; //Flip arbi signal to change the priority
 					else arbi = arbi;
 				end
@@ -266,9 +266,9 @@ module ccw_output(ccwso, ccwro, ccwdo,
 				end
 			STATE1 : //For ccw channel, enable data transfer from input buffer to output buffer and assert grant signal to indicate output buffer got data
 				begin
-					enable1_ccw_odd = ccwro ? 1:0;
+					enable1_ccw_odd = (ccwro == 1'b1) ? 1'b1 : 1'b0;
 					enable2_ccw_odd = 0;
-					grant_ccw_odd = ccwro ? 1:0;
+					grant_ccw_odd = (ccwro == 1'b1) ? 1'b1 : 1'b0;
 					enable1_pe_odd = 0;
 					enable2_pe_odd = 0;
 					grant_pe_odd = 0;
@@ -290,9 +290,9 @@ module ccw_output(ccwso, ccwro, ccwdo,
 					enable1_ccw_odd = 0;
 					enable2_ccw_odd = 0;
 					grant_ccw_odd = 0;
-					enable1_pe_odd = ccwro ? 1:0;
+					enable1_pe_odd = (ccwro == 1'b1) ? 1'b1 : 1'b0;
 					enable2_pe_odd = 0;
-					grant_pe_odd = ccwro ? 1:0;
+					grant_pe_odd = (ccwro == 1'b1) ? 1'b1 : 1'b0;
 					if (request_ccw_odd & request_pe_odd) arbi = ~arbi; //Flip arbi signal to change the priority
 					else arbi = arbi;
 				end

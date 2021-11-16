@@ -22,11 +22,11 @@ set link_library [list * gscl45nm.db dw_foundation.sldb standard.sldb]
 # Reading source verilog file.
 # copy your verilog file into ./src/ before synthesis.
 read_verilog ./src/${design_name}.v ;
+read_verilog ./src/cardinal_router.v ;
 read_verilog ./src/ALU.v;
 read_verilog ./src/cardinal_cpu.v;
 read_verilog ./src/cardinal_nic.v;
-read_verilog ./src/cardianl_ring.v;
-read_verilog ./src/cardianl_router.v;
+read_verilog ./src/cardinal_ring.v;
 read_verilog ./src/ccw_input.v;
 read_verilog ./src/ccw_output.v;
 read_verilog ./src/cw_input.v;
@@ -35,7 +35,7 @@ read_verilog ./src/EXMEM_WB.v;
 read_verilog ./src/HDU.v;
 read_verilog ./src/ID_EXMEM.v;
 read_verilog ./src/IF_ID.v;
-read_verilog ./src/NIC_router.v;
+read_verilog ./src/nic_router.v;
 read_verilog ./src/PC.v;
 read_verilog ./src/pe_input.v;
 read_verilog ./src/pe_output.v;
@@ -51,6 +51,8 @@ elaborate DW_square
 analyze -format verilog /usr/local/synopsys/Design_Compiler/K-2015.06-SP5-5/dw/sim_ver/DW_sqrt.v
 elaborate DW_sqrt
 
+analyze -format verilog ./src/cardinal_router.v
+elaborate cardinal_router
 analyze -format verilog ./src/cw_input.v
 elaborate cw_input
 analyze -format verilog ./src/ccw_input.v
@@ -63,8 +65,6 @@ analyze -format verilog ./src/ccw_output.v
 elaborate ccw_output
 analyze -format verilog ./src/pe_output.v
 elaborate pe_output
-analyze -format verilog ./src/cardinal_router.v
-elaborate cardinal_router
 analyze -format verilog ./src/cardinal_ring.v
 elaborate cardinal_ring
 analyze -format verilog ./src/cardinal_nic.v
