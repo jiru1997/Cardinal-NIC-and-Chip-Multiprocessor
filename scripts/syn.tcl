@@ -35,7 +35,7 @@ read_verilog ./src/EXMEM_WB.v;
 read_verilog ./src/HDU.v;
 read_verilog ./src/ID_EXMEM.v;
 read_verilog ./src/IF_ID.v;
-read_verilog ./src/nic_router.v;
+read_verilog ./src/NIC_router.v;
 read_verilog ./src/PC.v;
 read_verilog ./src/pe_input.v;
 read_verilog ./src/pe_output.v;

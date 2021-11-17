@@ -2,7 +2,7 @@
 //Author: Sihao Chen
 //Date: Oct.13.2021
 
-module cardinal_router(cwsi, cwri, cwdi, cwso, cwro, cwdo, ccwsi, ccwri, ccwdi, ccwso, ccwro, ccwdo, pesi, peri, pedi, peso, pero, pedo, clk, polarity, rst);
+module gold_router(cwsi, cwri, cwdi, cwso, cwro, cwdo, ccwsi, ccwri, ccwdi, ccwso, ccwro, ccwdo, pesi, peri, pedi, peso, pero, pedo, clk, polarity, rst);
 	parameter DATA_WIDTH = 64;
 	input cwsi, cwro, ccwsi, ccwro, pesi, pero, clk, rst;
 	input [DATA_WIDTH-1:0] cwdi, ccwdi, pedi;
