@@ -90,8 +90,7 @@ module cpu(clk, rst, pc_out, inst_in, d_in, d_out, addr_out, memWrEn, memEn, add
 					  .reg1_out(ID_reg1_out), 
 					  .reg2_out(ID_reg2_out), 
 					  .ppp(WB_ppp),
-					  .clk(clk), 
-					  .rst(rst)
+					  .clk(clk)
 					  );
 
 	// BEQ and BNEQ determination in ID stage
@@ -154,8 +153,8 @@ module cpu(clk, rst, pc_out, inst_in, d_in, d_out, addr_out, memWrEn, memEn, add
 
 	// data memory port 
 	always@(*) begin 
-		d_out = ID_reg1_out; // data need to write into dmem, since data mem has input register, it need get data from ID stage
-		d_out_nic = ID_reg1_out;
+		d_out <= ID_reg1_out; // data need to write into dmem, since data mem has input register, it need get data from ID stage
+		d_out_nic <= ID_reg1_out;
 		//$display(d_out);
 	end
 

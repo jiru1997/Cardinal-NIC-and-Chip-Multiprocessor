@@ -82,18 +82,21 @@ uniquify ;
 # This command checks whether your design can be compiled
 link ;
 
-# Create a clock with period of 5.
-create_clock -name clk -period 5.0 -waveform [list 0 2.5] [get_ports clk]
+create_clock -name clk -period 4.0 -waveform [list 0 2] [get_ports clk]
+
+# start with a large clock period e.g 100
+# then try shorter period until find minimum period
+
 
 # Setting timing constraints for combinational logic.
 # Specifying maximum delay from inputs to outputs
-set_max_delay 5.0 -to [all_outputs];
-set_max_delay 5.0 -from [all_inputs];
+# set_max_delay 5.0 -to [all_outputs];
+# set_max_delay 5.0 -from [all_inputs];
 
-# "check_design" checks the internal representation of the
-# current design for consistency and issues error and
-# warning messages as appropriate.
-check_design > report/$design_name.check_design ;
+set_input_delay -max 1.0 -clock clk [remove_from_collection [all_inputs] [get_ports clk]];
+set_output_delay -max 1.0 -clock clk [all_outputs];
+
+set_clock_latency -source 0.5 [get_ports clk];
 
 # Perforing synthesis and optimization on the current_design.
 compile ;

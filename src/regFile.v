@@ -3,12 +3,12 @@
 // Create Date: Oct.21.2021
 // Module Name: regFile
 
-module regFile(reg1, reg2, Wreg, Wdata, Wreg_en, reg1_out, reg2_out, ppp, clk, rst);
+module regFile(reg1, reg2, Wreg, Wdata, Wreg_en, reg1_out, reg2_out, ppp, clk);
 	input [0:4] reg1, reg2; // read address
 	input [0:4] Wreg;// write address
 	input [0:63] Wdata; // write back data
 	input Wreg_en; //write enable signal
-	input clk, rst;
+	input clk;
 	input [0:2] ppp;// selective write back
 	output [0:63] reg1_out, reg2_out; // read data
 
