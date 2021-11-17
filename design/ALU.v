@@ -56,60 +56,64 @@ reg[0:5] sll_d, srl_d, sra_d;
 
 //div operation----------------------------------------------------------------------
 wire[0:63] quotient_VDIV_B_wire, remainder_VDIV_B_wire, divide_by_0_VDIV_b;
+wire[0:63] remainder_VMOD_B_wire;
 
-DW_div #(8, 8, 0, 1) VDIV_b1 (.a(data2[0:7]),   .b(data1[0:7]),   .quotient(quotient_VDIV_B_wire[0:7]),   .remainder(remainder_VDIV_B_wire[0:7]),   .divide_by_0(divide_by_0_VDIV_b[0]));
-DW_div #(8, 8, 0, 1) VDIV_b2 (.a(data2[8:15]),  .b(data1[8:15]),  .quotient(quotient_VDIV_B_wire[8:15]),  .remainder(remainder_VDIV_B_wire[8:15]),  .divide_by_0(divide_by_0_VDIV_b[8]));
-DW_div #(8, 8, 0, 1) VDIV_b3 (.a(data2[16:23]), .b(data1[16:23]), .quotient(quotient_VDIV_B_wire[16:23]), .remainder(remainder_VDIV_B_wire[16:23]), .divide_by_0(divide_by_0_VDIV_b[16]));
-DW_div #(8, 8, 0, 1) VDIV_b4 (.a(data2[24:31]), .b(data1[24:31]), .quotient(quotient_VDIV_B_wire[24:31]), .remainder(remainder_VDIV_B_wire[24:31]), .divide_by_0(divide_by_0_VDIV_b[24]));
-DW_div #(8, 8, 0, 1) VDIV_b5 (.a(data2[32:39]), .b(data1[32:39]), .quotient(quotient_VDIV_B_wire[32:39]), .remainder(remainder_VDIV_B_wire[32:39]), .divide_by_0(divide_by_0_VDIV_b[32]));
-DW_div #(8, 8, 0, 1) VDIV_b6 (.a(data2[40:47]), .b(data1[40:47]), .quotient(quotient_VDIV_B_wire[40:47]), .remainder(remainder_VDIV_B_wire[40:47]), .divide_by_0(divide_by_0_VDIV_b[40]));
-DW_div #(8, 8, 0, 1) VDIV_b7 (.a(data2[48:55]), .b(data1[48:55]), .quotient(quotient_VDIV_B_wire[48:55]), .remainder(remainder_VDIV_B_wire[48:55]), .divide_by_0(divide_by_0_VDIV_b[48]));
-DW_div #(8, 8, 0, 1) VDIV_b8 (.a(data2[56:63]), .b(data1[56:63]), .quotient(quotient_VDIV_B_wire[56:63]), .remainder(remainder_VDIV_B_wire[56:63]), .divide_by_0(divide_by_0_VDIV_b[56]));
+DW_div #(8, 8, 0, 1) VDIV_b1 (.a(data2[0:7]),   .b(data1[0:7]),   .quotient(quotient_VDIV_B_wire[0:7]),   .remainder(remainder_VMOD_B_wire[0:7]),   .divide_by_0(divide_by_0_VDIV_b[0]));
+DW_div #(8, 8, 0, 1) VDIV_b2 (.a(data2[8:15]),  .b(data1[8:15]),  .quotient(quotient_VDIV_B_wire[8:15]),  .remainder(remainder_VMOD_B_wire[8:15]),  .divide_by_0(divide_by_0_VDIV_b[8]));
+DW_div #(8, 8, 0, 1) VDIV_b3 (.a(data2[16:23]), .b(data1[16:23]), .quotient(quotient_VDIV_B_wire[16:23]), .remainder(remainder_VMOD_B_wire[16:23]), .divide_by_0(divide_by_0_VDIV_b[16]));
+DW_div #(8, 8, 0, 1) VDIV_b4 (.a(data2[24:31]), .b(data1[24:31]), .quotient(quotient_VDIV_B_wire[24:31]), .remainder(remainder_VMOD_B_wire[24:31]), .divide_by_0(divide_by_0_VDIV_b[24]));
+DW_div #(8, 8, 0, 1) VDIV_b5 (.a(data2[32:39]), .b(data1[32:39]), .quotient(quotient_VDIV_B_wire[32:39]), .remainder(remainder_VMOD_B_wire[32:39]), .divide_by_0(divide_by_0_VDIV_b[32]));
+DW_div #(8, 8, 0, 1) VDIV_b6 (.a(data2[40:47]), .b(data1[40:47]), .quotient(quotient_VDIV_B_wire[40:47]), .remainder(remainder_VMOD_B_wire[40:47]), .divide_by_0(divide_by_0_VDIV_b[40]));
+DW_div #(8, 8, 0, 1) VDIV_b7 (.a(data2[48:55]), .b(data1[48:55]), .quotient(quotient_VDIV_B_wire[48:55]), .remainder(remainder_VMOD_B_wire[48:55]), .divide_by_0(divide_by_0_VDIV_b[48]));
+DW_div #(8, 8, 0, 1) VDIV_b8 (.a(data2[56:63]), .b(data1[56:63]), .quotient(quotient_VDIV_B_wire[56:63]), .remainder(remainder_VMOD_B_wire[56:63]), .divide_by_0(divide_by_0_VDIV_b[56]));
 
 wire[0:63] quotient_VDIV_H_wire, remainder_VDIV_H_wire, divide_by_0_VDIV_h;
+wire[0:63] remainder_VMOD_H_wire;
 
-DW_div #(16, 16, 0, 1) VDIV_h1 (.a(data2[0:15]),  .b(data1[0:15]),  .quotient(quotient_VDIV_H_wire[0:15]),  .remainder(remainder_VDIV_H_wire[0:15]),  .divide_by_0(divide_by_0_VDIV_h[0]));
-DW_div #(16, 16, 0, 1) VDIV_h2 (.a(data2[16:31]), .b(data1[16:31]), .quotient(quotient_VDIV_H_wire[16:31]), .remainder(remainder_VDIV_H_wire[16:31]), .divide_by_0(divide_by_0_VDIV_h[16]));
-DW_div #(16, 16, 0, 1) VDIV_h3 (.a(data2[32:47]), .b(data1[32:47]), .quotient(quotient_VDIV_H_wire[32:47]), .remainder(remainder_VDIV_H_wire[32:47]), .divide_by_0(divide_by_0_VDIV_h[32]));
-DW_div #(16, 16, 0, 1) VDIV_h4 (.a(data2[48:63]), .b(data1[48:63]), .quotient(quotient_VDIV_H_wire[48:63]), .remainder(remainder_VDIV_H_wire[48:63]), .divide_by_0(divide_by_0_VDIV_h[48]));
+DW_div #(16, 16, 0, 1) VDIV_h1 (.a(data2[0:15]),  .b(data1[0:15]),  .quotient(quotient_VDIV_H_wire[0:15]),  .remainder(remainder_VMOD_H_wire[0:15]),  .divide_by_0(divide_by_0_VDIV_h[0]));
+DW_div #(16, 16, 0, 1) VDIV_h2 (.a(data2[16:31]), .b(data1[16:31]), .quotient(quotient_VDIV_H_wire[16:31]), .remainder(remainder_VMOD_H_wire[16:31]), .divide_by_0(divide_by_0_VDIV_h[16]));
+DW_div #(16, 16, 0, 1) VDIV_h3 (.a(data2[32:47]), .b(data1[32:47]), .quotient(quotient_VDIV_H_wire[32:47]), .remainder(remainder_VMOD_H_wire[32:47]), .divide_by_0(divide_by_0_VDIV_h[32]));
+DW_div #(16, 16, 0, 1) VDIV_h4 (.a(data2[48:63]), .b(data1[48:63]), .quotient(quotient_VDIV_H_wire[48:63]), .remainder(remainder_VMOD_H_wire[48:63]), .divide_by_0(divide_by_0_VDIV_h[48]));
 
 wire[0:63] quotient_VDIV_W_wire, remainder_VDIV_W_wire, divide_by_0_VDIV_w;
+wire[0:63] remainder_VMOD_W_wire;
 
-DW_div #(32, 32, 0, 1) VDIV_w1 (.a(data2[0:31]),  .b(data1[0:31]),  .quotient(quotient_VDIV_W_wire[0:31]),  .remainder(remainder_VDIV_W_wire[0:31]),  .divide_by_0(divide_by_0_VDIV_w[0]));
-DW_div #(32, 32, 0, 1) VDIV_w2 (.a(data2[32:63]), .b(data1[32:63]), .quotient(quotient_VDIV_W_wire[32:63]), .remainder(remainder_VDIV_W_wire[32:63]), .divide_by_0(divide_by_0_VDIV_w[32]));
+DW_div #(32, 32, 0, 1) VDIV_w1 (.a(data2[0:31]),  .b(data1[0:31]),  .quotient(quotient_VDIV_W_wire[0:31]),  .remainder(remainder_VMOD_W_wire[0:31]),  .divide_by_0(divide_by_0_VDIV_w[0]));
+DW_div #(32, 32, 0, 1) VDIV_w2 (.a(data2[32:63]), .b(data1[32:63]), .quotient(quotient_VDIV_W_wire[32:63]), .remainder(remainder_VMOD_W_wire[32:63]), .divide_by_0(divide_by_0_VDIV_w[32]));
 
 wire[0:63] quotient_VDIV_D_wire, remainder_VDIV_D_wire, divide_by_0_VDIV_d;
+wire[0:63] remainder_VMOD_D_wire;
 
-DW_div #(64, 64, 0, 1) VDIV_d (.a(data2[0:63]),  .b(data1[0:63]),  .quotient(quotient_VDIV_D_wire[0:63]),  .remainder(remainder_VDIV_D_wire[0:63]),  .divide_by_0(divide_by_0_VDIV_d[0]));
+DW_div #(64, 64, 0, 1) VDIV_d (.a(data2[0:63]),  .b(data1[0:63]),  .quotient(quotient_VDIV_D_wire[0:63]),  .remainder(remainder_VMOD_D_wire[0:63]),  .divide_by_0(divide_by_0_VDIV_d[0]));
 
 
 //mod operation--------------------------------------------------------------------
-wire[0:63] quotient_VMOD_B_wire, remainder_VMOD_B_wire, divide_by_0_VMOD_b;
 
-DW_div #(8, 8, 0, 1) VMOD_b1 (.a(data2[0:7]),   .b(data1[0:7]),   .quotient(quotient_VMOD_B_wire[0:7]),   .remainder(remainder_VMOD_B_wire[0:7]),   .divide_by_0(divide_by_0_VMOD_b[0]));
-DW_div #(8, 8, 0, 1) VMOD_b2 (.a(data2[8:15]),  .b(data1[8:15]),  .quotient(quotient_VMOD_B_wire[8:15]),  .remainder(remainder_VMOD_B_wire[8:15]),  .divide_by_0(divide_by_0_VMOD_b[8]));
-DW_div #(8, 8, 0, 1) VMOD_b3 (.a(data2[16:23]), .b(data1[16:23]), .quotient(quotient_VMOD_B_wire[16:23]), .remainder(remainder_VMOD_B_wire[16:23]), .divide_by_0(divide_by_0_VMOD_b[16]));
-DW_div #(8, 8, 0, 1) VMOD_b4 (.a(data2[24:31]), .b(data1[24:31]), .quotient(quotient_VMOD_B_wire[24:31]), .remainder(remainder_VMOD_B_wire[24:31]), .divide_by_0(divide_by_0_VMOD_b[24]));
-DW_div #(8, 8, 0, 1) VMOD_b5 (.a(data2[32:39]), .b(data1[32:39]), .quotient(quotient_VMOD_B_wire[32:39]), .remainder(remainder_VMOD_B_wire[32:39]), .divide_by_0(divide_by_0_VMOD_b[32]));
-DW_div #(8, 8, 0, 1) VMOD_b6 (.a(data2[40:47]), .b(data1[40:47]), .quotient(quotient_VMOD_B_wire[40:47]), .remainder(remainder_VMOD_B_wire[40:47]), .divide_by_0(divide_by_0_VMOD_b[40]));
-DW_div #(8, 8, 0, 1) VMOD_b7 (.a(data2[48:55]), .b(data1[48:55]), .quotient(quotient_VMOD_B_wire[48:55]), .remainder(remainder_VMOD_B_wire[48:55]), .divide_by_0(divide_by_0_VMOD_b[48]));
-DW_div #(8, 8, 0, 1) VMOD_b8 (.a(data2[56:63]), .b(data1[56:63]), .quotient(quotient_VMOD_B_wire[56:63]), .remainder(remainder_VMOD_B_wire[56:63]), .divide_by_0(divide_by_0_VMOD_b[56]));
 
-wire[0:63] quotient_VMOD_H_wire, remainder_VMOD_H_wire, divide_by_0_VMOD_h;
+//DW_div #(8, 8, 0, 1) VMOD_b1 (.a(data2[0:7]),   .b(data1[0:7]),   .quotient(quotient_VMOD_B_wire[0:7]),   .remainder(remainder_VMOD_B_wire[0:7]),   .divide_by_0(divide_by_0_VMOD_b[0]));
+//DW_div #(8, 8, 0, 1) VMOD_b2 (.a(data2[8:15]),  .b(data1[8:15]),  .quotient(quotient_VMOD_B_wire[8:15]),  .remainder(remainder_VMOD_B_wire[8:15]),  .divide_by_0(divide_by_0_VMOD_b[8]));
+//DW_div #(8, 8, 0, 1) VMOD_b3 (.a(data2[16:23]), .b(data1[16:23]), .quotient(quotient_VMOD_B_wire[16:23]), .remainder(remainder_VMOD_B_wire[16:23]), .divide_by_0(divide_by_0_VMOD_b[16]));
+//DW_div #(8, 8, 0, 1) VMOD_b4 (.a(data2[24:31]), .b(data1[24:31]), .quotient(quotient_VMOD_B_wire[24:31]), .remainder(remainder_VMOD_B_wire[24:31]), .divide_by_0(divide_by_0_VMOD_b[24]));
+//DW_div #(8, 8, 0, 1) VMOD_b5 (.a(data2[32:39]), .b(data1[32:39]), .quotient(quotient_VMOD_B_wire[32:39]), .remainder(remainder_VMOD_B_wire[32:39]), .divide_by_0(divide_by_0_VMOD_b[32]));
+//DW_div #(8, 8, 0, 1) VMOD_b6 (.a(data2[40:47]), .b(data1[40:47]), .quotient(quotient_VMOD_B_wire[40:47]), .remainder(remainder_VMOD_B_wire[40:47]), .divide_by_0(divide_by_0_VMOD_b[40]));
+//DW_div #(8, 8, 0, 1) VMOD_b7 (.a(data2[48:55]), .b(data1[48:55]), .quotient(quotient_VMOD_B_wire[48:55]), .remainder(remainder_VMOD_B_wire[48:55]), .divide_by_0(divide_by_0_VMOD_b[48]));
+//DW_div #(8, 8, 0, 1) VMOD_b8 (.a(data2[56:63]), .b(data1[56:63]), .quotient(quotient_VMOD_B_wire[56:63]), .remainder(remainder_VMOD_B_wire[56:63]), .divide_by_0(divide_by_0_VMOD_b[56]));
 
-DW_div #(16, 16, 0, 1) VMOD_h1 (.a(data2[0:15]),  .b(data1[0:15]),  .quotient(quotient_VMOD_H_wire[0:15]),  .remainder(remainder_VMOD_H_wire[0:15]),  .divide_by_0(divide_by_0_VMOD_h[0]));
-DW_div #(16, 16, 0, 1) VMOD_h2 (.a(data2[16:31]), .b(data1[16:31]), .quotient(quotient_VMOD_H_wire[16:31]), .remainder(remainder_VMOD_H_wire[16:31]), .divide_by_0(divide_by_0_VMOD_h[1]));
-DW_div #(16, 16, 0, 1) VMOD_h3 (.a(data2[32:47]), .b(data1[32:47]), .quotient(quotient_VMOD_H_wire[32:47]), .remainder(remainder_VMOD_H_wire[32:47]), .divide_by_0(divide_by_0_VMOD_h[3]));
-DW_div #(16, 16, 0, 1) VMOD_h4 (.a(data2[48:63]), .b(data1[48:63]), .quotient(quotient_VMOD_H_wire[48:63]), .remainder(remainder_VMOD_H_wire[48:63]), .divide_by_0(divide_by_0_VMOD_h[4]));
 
-wire[0:63] quotient_VMOD_W_wire, remainder_VMOD_W_wire, divide_by_0_VMOD_w;
 
-DW_div #(32, 32, 0, 1) VMOD_w1 (.a(data2[0:31]),  .b(data1[0:31]),  .quotient(quotient_VMOD_W_wire[0:31]),  .remainder(remainder_VMOD_W_wire[0:31]),  .divide_by_0(divide_by_0_VMOD_w[0]));
-DW_div #(32, 32, 0, 1) VMOD_w2 (.a(data2[32:63]), .b(data1[32:63]), .quotient(quotient_VMOD_W_wire[32:63]), .remainder(remainder_VMOD_W_wire[32:63]), .divide_by_0(divide_by_0_VMOD_w[32]));
+//DW_div #(16, 16, 0, 1) VMOD_h1 (.a(data2[0:15]),  .b(data1[0:15]),  .quotient(quotient_VMOD_H_wire[0:15]),  .remainder(remainder_VMOD_H_wire[0:15]),  .divide_by_0(divide_by_0_VMOD_h[0]));
+//DW_div #(16, 16, 0, 1) VMOD_h2 (.a(data2[16:31]), .b(data1[16:31]), .quotient(quotient_VMOD_H_wire[16:31]), .remainder(remainder_VMOD_H_wire[16:31]), .divide_by_0(divide_by_0_VMOD_h[1]));
+//DW_div #(16, 16, 0, 1) VMOD_h3 (.a(data2[32:47]), .b(data1[32:47]), .quotient(quotient_VMOD_H_wire[32:47]), .remainder(remainder_VMOD_H_wire[32:47]), .divide_by_0(divide_by_0_VMOD_h[3]));
+//DW_div #(16, 16, 0, 1) VMOD_h4 (.a(data2[48:63]), .b(data1[48:63]), .quotient(quotient_VMOD_H_wire[48:63]), .remainder(remainder_VMOD_H_wire[48:63]), .divide_by_0(divide_by_0_VMOD_h[4]));
 
-wire[0:63] quotient_VMOD_D_wire, remainder_VMOD_D_wire, divide_by_0_VMOD_d;
 
-DW_div #(64, 64, 0, 1) VMOD_d (.a(data2[0:63]),  .b(data1[0:63]),  .quotient(quotient_VMOD_D_wire[0:63]),  .remainder(remainder_VMOD_D_wire[0:63]),  .divide_by_0(divide_by_0_VMOD_d[0]));
+
+//DW_div #(32, 32, 0, 1) VMOD_w1 (.a(data2[0:31]),  .b(data1[0:31]),  .quotient(quotient_VMOD_W_wire[0:31]),  .remainder(remainder_VMOD_W_wire[0:31]),  .divide_by_0(divide_by_0_VMOD_w[0]));
+//DW_div #(32, 32, 0, 1) VMOD_w2 (.a(data2[32:63]), .b(data1[32:63]), .quotient(quotient_VMOD_W_wire[32:63]), .remainder(remainder_VMOD_W_wire[32:63]), .divide_by_0(divide_by_0_VMOD_w[32]));
+
+
+
+//DW_div #(64, 64, 0, 1) VMOD_d (.a(data2[0:63]),  .b(data1[0:63]),  .quotient(quotient_VMOD_D_wire[0:63]),  .remainder(remainder_VMOD_D_wire[0:63]),  .divide_by_0(divide_by_0_VMOD_d[0]));
 
 
 //square even operation-----------------------------------------------------------------

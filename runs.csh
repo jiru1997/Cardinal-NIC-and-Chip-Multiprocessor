@@ -18,7 +18,7 @@ make
 
 @ num = 0
 ## Running total of 40 tests (0-39)
-while ( $num < 1 )
+while ( $num < 20 )
 	if ($num == 0) then
 		cp ${tests}/dmem_0.0.fill cmp_test.dmem.0.fill
 		cp ${tests}/dmem_0.1.fill cmp_test.dmem.1.fill
