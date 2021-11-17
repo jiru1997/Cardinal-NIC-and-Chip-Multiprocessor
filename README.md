@@ -1,4 +1,4 @@
-# Cardinal-NIC-and-Chip-Multiprocessor-
+# Cardinal-NIC-and-Chip-Multiprocessor
 Cardinal NIC and Chip Multiprocessor
 
 <img width="632" alt="image" src="https://user-images.githubusercontent.com/66343787/142299481-5925eb17-acc3-4a33-b71e-bb8267663045.png">
