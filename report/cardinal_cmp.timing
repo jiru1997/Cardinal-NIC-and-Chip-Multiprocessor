@@ -8,7 +8,7 @@ Report : timing
         -max_paths 1
 Design : cardinal_cmp
 Version: K-2015.06-SP5-5
-Date   : Wed Nov 17 11:08:34 2021
+Date   : Wed Nov 17 12:04:24 2021
 ****************************************
 
  # A fanout number of 1000 was used for high fanout net computations.

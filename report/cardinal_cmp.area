@@ -3,14 +3,14 @@
 Report : area
 Design : cardinal_cmp
 Version: K-2015.06-SP5-5
-Date   : Wed Nov 17 11:08:34 2021
+Date   : Wed Nov 17 12:04:24 2021
 ****************************************
 
 Library(s) Used:
 
     gscl45nm (File: /home/scf-22/ee577/NCSU45PDK/FreePDK45/osu_soc/lib/files/gscl45nm.db)
 
-Number of ports:                        41435
+Number of ports:                        41431
 Number of nets:                        482027
 Number of cells:                       396375
 Number of combinational cells:         369001
