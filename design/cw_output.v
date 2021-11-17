@@ -23,7 +23,7 @@ module cw_output(cwso, cwro, cwdo,
 	reg [4:0] state_even, state_odd, next_state_even, next_state_odd;
 	reg enable1_cw_even, enable1_cw_odd, enable1_pe_even, enable1_pe_odd, enable2_cw_even, enable2_cw_odd, enable2_pe_even, enable2_pe_odd;
 	reg [DATA_WIDTH-1:0] data_internal_even_cw, data_internal_even_pe, data_internal_odd_cw, data_internal_odd_pe;
-	reg arbi; //Trace priority, cw first pe later, then change order
+	reg arbi_even, arbi_odd, arbi; //Trace priority, cw first pe later, then change order
 
 	//For cw channel
 	//From input buffer to output buffer when enable1 asserted
@@ -113,6 +113,14 @@ module cw_output(cwso, cwro, cwdo,
 		end
 	end
 
+	always@(*) begin
+      if(polarity == 1) begin
+        arbi = arbi_even;
+      end else begin
+        arbi = arbi_odd;
+      end
+	end
+
 	always@(state_even, request_cw_even, request_pe_even, cwro, polarity) begin
 		case(state_even) 
 			STATE0 : 
@@ -148,66 +156,6 @@ module cw_output(cwso, cwro, cwdo,
 		endcase
 	end
 
-//	always@(state_even, state_odd, request_cw_even, request_pe_even, request_cw_odd, request_pe_odd, rst, cwro) begin
-//		case(state_even) 
-//			STATE0 : 
-//				begin
-//					if (rst) arbi = 0;
-//					else arbi = arbi;
-//				end
-//			STATE1 : 
-//				begin
-//					if (request_cw_even & request_pe_even) arbi = ~arbi; 
-//					else arbi = arbi;
-//				end
-//			STATE2 : 
-//				begin
-//					arbi = arbi;
-//				end
-//			STATE3 : 
-//				begin
-//					if (request_cw_even & request_pe_even) arbi = ~arbi; 
-//					else arbi = arbi;
-//				end
-//			STATE4 : 
-//				begin
-//					arbi = arbi;
-//				end
-//			default : 
-//				begin
-//					arbi = 0;
-//				end
-//		endcase
-//		case(state_odd) 
-//			STATE0 : 
-//				begin
-//					if (rst) arbi = 0;
-//					else arbi = arbi;
-//				end
-//			STATE1 : 
-//				begin
-//					if (request_cw_odd & request_pe_odd) arbi = ~arbi; 
-//					else arbi = arbi;
-//				end
-//			STATE2 : 
-//				begin
-//					arbi = arbi;
-//				end
-//			STATE3 : 
-//				begin
-//					if (request_cw_odd & request_pe_odd) arbi = ~arbi; 
-//					else arbi = arbi;
-//				end
-//			STATE4 : 
-//				begin
-//					arbi = arbi;
-//				end
-//			default : 
-//				begin
-//					arbi = 0;
-//				end
-//		endcase
-//	end
 
 	always@(state_even, request_cw_even, request_pe_even, rst, cwro) begin
 		case(state_even) 
@@ -219,8 +167,8 @@ module cw_output(cwso, cwro, cwdo,
 					enable2_pe_even = 0;
 					grant_cw_even = 0;
 					grant_pe_even = 0;
-					if (rst) arbi = 0;
-					else arbi = arbi;
+					if (rst) arbi_even = 0;
+					else arbi_even = arbi_even;
 				end
 			STATE1 : //For cw channel, enable data transfer from input buffer to output buffer and assert grant signal to indicate output buffer got data
 				begin
@@ -230,8 +178,8 @@ module cw_output(cwso, cwro, cwdo,
 					enable1_pe_even = 0;
 					enable2_pe_even = 0;
 					grant_pe_even = 0;
-					if (request_cw_even & request_pe_even) arbi = ~arbi; //Flip arbi signal to change the priority
-					else arbi = arbi;
+					if (request_cw_even & request_pe_even) arbi_even = ~arbi_even; //Flip arbi signal to change the priority
+					else arbi_even = arbi_even;
 				end
 			STATE2 : // For cw channel, enable data transfer from output channel to cwdo, dessert the grant signal to indicate output buffer is ready for new data
 				begin
@@ -241,7 +189,7 @@ module cw_output(cwso, cwro, cwdo,
 					enable1_pe_even = 0;
 					enable2_pe_even = 0;
 					grant_pe_even = 0;
-					arbi = arbi;
+					arbi_even = arbi_even;
 				end
 			STATE3 : //For pe channel, enable data transfer from input buffer to output buffer and assert grant signal to indicate output buffer got data
 				begin
@@ -251,8 +199,8 @@ module cw_output(cwso, cwro, cwdo,
 					enable1_pe_even = (cwro == 1'b1) ? 1'b1: 1'b0;
 					enable2_pe_even = 0;
 					grant_pe_even = (cwro == 1'b1) ? 1'b1: 1'b0;
-					if (request_cw_even & request_pe_even) arbi = ~arbi; //Flip arbi signal to change the priority
-					else arbi = arbi;
+					if (request_cw_even & request_pe_even) arbi_even = ~arbi_even; //Flip arbi signal to change the priority
+					else arbi_even = arbi_even;
 				end
 			STATE4 : // For pe channel, enable data transfer from output channel to cwdo, dessert the grant signal to indicate output buffer is ready for new data
 				begin
@@ -262,7 +210,7 @@ module cw_output(cwso, cwro, cwdo,
 					enable1_pe_even = 0;
 					enable2_pe_even = 1;
 					grant_pe_even = 0;
-					arbi = arbi;
+					arbi_even = arbi_even;
 				end
 			default : 
 				begin
@@ -272,7 +220,7 @@ module cw_output(cwso, cwro, cwdo,
 					enable1_pe_even = 0;
 					enable2_pe_even = 0;
 					grant_pe_even = 0;
-					arbi = 0;
+					arbi_even = 0;
 				end
 		endcase
 	end
@@ -322,8 +270,8 @@ module cw_output(cwso, cwro, cwdo,
 					enable2_pe_odd = 0;
 					grant_cw_odd = 0;
 					grant_pe_odd = 0;
-					if (rst) arbi = 0;
-					else arbi = arbi;
+					if (rst) arbi_odd = 0;
+					else arbi_odd = arbi_odd;
 				end
 			STATE1 : //For cw channel, enable data transfer from input buffer to output buffer and assert grant signal to indicate output buffer got data
 				begin
@@ -333,8 +281,8 @@ module cw_output(cwso, cwro, cwdo,
 					enable1_pe_odd = 0;
 					enable2_pe_odd = 0;
 					grant_pe_odd = 0;
-					if (request_cw_odd & request_pe_odd) arbi = ~arbi; //Flip arbi signal to change the priority
-					else arbi = arbi;
+					if (request_cw_odd & request_pe_odd) arbi_odd = ~arbi_odd; //Flip arbi signal to change the priority
+					else arbi_odd = arbi_odd;
 				end
 			STATE2 : // For cw channel, enable data transfer from output channel to cwdo, dessert the grant signal to indicate output buffer is ready for new data
 				begin
@@ -344,7 +292,7 @@ module cw_output(cwso, cwro, cwdo,
 					enable1_pe_odd = 0;
 					enable2_pe_odd = 0;
 					grant_pe_odd = 0;
-					arbi = arbi;
+					arbi_odd = arbi_odd;
 				end
 			STATE3 : //For pe channel, enable data transfer from input buffer to output buffer and assert grant signal to indicate output buffer got data
 				begin
@@ -354,8 +302,8 @@ module cw_output(cwso, cwro, cwdo,
 					enable1_pe_odd = (cwro == 1'b1) ? 1'b1: 1'b0;
 					enable2_pe_odd = 0;
 					grant_pe_odd = (cwro == 1'b1) ? 1'b1: 1'b0;
-					if (request_cw_odd & request_pe_odd) arbi = ~arbi; //Flip arbi signal to change the priority
-					else arbi = arbi;
+					if (request_cw_odd & request_pe_odd) arbi_odd = ~arbi_odd; //Flip arbi signal to change the priority
+					else arbi_odd = arbi_odd;
 				end
 			STATE4 : // For pe channel, enable data transfer from output channel to cwdo, dessert the grant signal to indicate output buffer is ready for new data
 				begin
@@ -365,7 +313,7 @@ module cw_output(cwso, cwro, cwdo,
 					enable1_pe_odd = 0;
 					enable2_pe_odd = 1;
 					grant_pe_odd = 0;
-					arbi = arbi;
+					arbi_odd = arbi_odd;
 				end
 			default : 
 				begin
@@ -375,7 +323,7 @@ module cw_output(cwso, cwro, cwdo,
 					enable1_pe_odd = 0;
 					enable2_pe_odd = 0;
 					grant_pe_odd = 0;
-					arbi = 0;
+					arbi_odd = 0;
 				end
 		endcase
 	end

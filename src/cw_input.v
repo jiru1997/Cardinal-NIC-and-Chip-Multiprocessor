@@ -263,7 +263,6 @@ module cw_input(cwsi, cwri, cwdi,
 							request_pe_even = 0;
 							request_cw_even = 1;
 						end
-						cwri_even = 0;
 					end else begin
 						//enable_pe_even = 0;
 						request_pe_even = 0;
