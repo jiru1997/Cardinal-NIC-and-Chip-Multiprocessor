@@ -1,0 +1,68 @@
+Information: Updating design information... (UID-85)
+Warning: Design 'cardinal_cmp' contains 1 high-fanout nets. A fanout number of 1000 will be used for delay calculations involving these nets. (TIM-134)
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : cardinal_cmp
+Version: K-2015.06-SP5-5
+Date   : Wed Nov 17 20:39:26 2021
+****************************************
+
+ # A fanout number of 1000 was used for high fanout net computations.
+
+Operating Conditions: typical   Library: gscl45nm
+Wire Load Model Mode: top
+
+  Startpoint: cpu0/myIF_ID/ID_reg1_reg[3]
+              (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: node0_d_out[22]
+            (output port clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock clk (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.50       0.50
+  cpu0/myIF_ID/ID_reg1_reg[3]/CLK (DFFPOSX1)              0.00 #     0.50 r
+  cpu0/myIF_ID/ID_reg1_reg[3]/Q (DFFPOSX1)                0.11       0.61 f
+  cpu0/myIF_ID/ID_reg1[3] (IF_ID_3)                       0.00       0.61 f
+  cpu0/myregFile/reg1[3] (regFile_3)                      0.00       0.61 f
+  cpu0/myregFile/U1433/Y (OR2X2)                          0.05       0.66 f
+  cpu0/myregFile/U1435/Y (INVX1)                          0.00       0.66 r
+  cpu0/myregFile/U1421/Y (AND2X2)                         0.03       0.69 r
+  cpu0/myregFile/U1423/Y (INVX1)                          0.02       0.71 f
+  cpu0/myregFile/U993/Y (INVX1)                           0.01       0.72 r
+  cpu0/myregFile/U4444/Y (INVX1)                          0.01       0.73 f
+  cpu0/myregFile/U3564/Y (INVX1)                          0.01       0.74 r
+  cpu0/myregFile/U12751/Y (INVX1)                         0.01       0.75 f
+  cpu0/myregFile/U4753/Y (INVX1)                          0.01       0.76 r
+  cpu0/myregFile/U4750/Y (INVX1)                          0.02       0.78 f
+  cpu0/myregFile/U858/Y (OR2X2)                           0.04       0.82 f
+  cpu0/myregFile/U14253/Y (OAI21X1)                       0.02       0.84 r
+  cpu0/myregFile/U136/Y (OR2X2)                           0.05       0.88 r
+  cpu0/myregFile/U4999/Y (INVX1)                          0.02       0.90 f
+  cpu0/myregFile/U14261/Y (AOI22X1)                       0.05       0.95 r
+  cpu0/myregFile/U1267/Y (AND2X2)                         0.03       0.98 r
+  cpu0/myregFile/U1268/Y (INVX1)                          0.01       1.00 f
+  cpu0/myregFile/U3907/Y (AND2X1)                         0.03       1.03 f
+  cpu0/myregFile/reg1_out[22] (regFile_3)                 0.00       1.03 f
+  cpu0/d_out[22] (cpu_3)                                  0.00       1.03 f
+  node0_d_out[22] (out)                                   0.00       1.03 f
+  data arrival time                                                  1.03
+
+  clock clk (rise edge)                                   2.00       2.00
+  clock network delay (ideal)                             0.00       2.00
+  output external delay                                  -1.00       1.00
+  data required time                                                 1.00
+  --------------------------------------------------------------------------
+  data required time                                                 1.00
+  data arrival time                                                 -1.03
+  --------------------------------------------------------------------------
+  slack (VIOLATED)                                                  -0.03
+
+
+1

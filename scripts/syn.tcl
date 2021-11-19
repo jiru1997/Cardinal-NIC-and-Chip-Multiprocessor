@@ -21,38 +21,36 @@ set link_library [list * gscl45nm.db dw_foundation.sldb standard.sldb]
 
 # Reading source verilog file.
 # copy your verilog file into ./src/ before synthesis.
-read_verilog ./src/${design_name}.v ;
-read_verilog ./src/cardinal_router.v ;
-read_verilog ./src/ALU.v;
-read_verilog ./src/cardinal_cpu.v;
-read_verilog ./src/cardinal_nic.v;
-read_verilog ./src/cardinal_ring.v;
-read_verilog ./src/ccw_input.v;
-read_verilog ./src/ccw_output.v;
+# read_verilog ./src/${design_name}.v ;
 read_verilog ./src/cw_input.v;
+read_verilog ./src/ccw_input.v;
+read_verilog ./src/pe_input.v;
 read_verilog ./src/cw_output.v;
+read_verilog ./src/ccw_output.v;
+read_verilog ./src/pe_output.v;
+read_verilog ./src/cardinal_router.v;
+read_verilog ./src/cardinal_ring.v;
+read_verilog ./src/cardinal_nic.v;
+read_verilog ./src/ALU.v
 read_verilog ./src/EXMEM_WB.v;
 read_verilog ./src/HDU.v;
 read_verilog ./src/ID_EXMEM.v;
 read_verilog ./src/IF_ID.v;
-read_verilog ./src/NIC_router.v;
 read_verilog ./src/PC.v;
-read_verilog ./src/pe_input.v;
-read_verilog ./src/pe_output.v;
 read_verilog ./src/regFile.v;
+read_verilog ./src/cardinal_cpu.v;
+read_verilog ./src/NIC_router.v;
+read_verilog ./src/${design_name}.v ;
+
+
 
 # Inside of read_verilog, for design with parameters, use these two lines below: analyze + elaborate
-analyze -format verilog /usr/local/synopsys/Design_Compiler/K-2015.06-SP5-5/dw/sim_ver/DW_div.v
-elaborate DW_div
-
-analyze -format verilog /usr/local/synopsys/Design_Compiler/K-2015.06-SP5-5/dw/sim_ver/DW_square.v
-elaborate DW_square
-
 analyze -format verilog /usr/local/synopsys/Design_Compiler/K-2015.06-SP5-5/dw/sim_ver/DW_sqrt.v
 elaborate DW_sqrt
-
-analyze -format verilog ./src/cardinal_router.v
-elaborate cardinal_router
+analyze -format verilog /usr/local/synopsys/Design_Compiler/K-2015.06-SP5-5/dw/sim_ver/DW_div.v
+elaborate DW_div
+analyze -format verilog /usr/local/synopsys/Design_Compiler/K-2015.06-SP5-5/dw/sim_ver/DW_square.v
+elaborate DW_square
 analyze -format verilog ./src/cw_input.v
 elaborate cw_input
 analyze -format verilog ./src/ccw_input.v
@@ -65,10 +63,13 @@ analyze -format verilog ./src/ccw_output.v
 elaborate ccw_output
 analyze -format verilog ./src/pe_output.v
 elaborate pe_output
+analyze -format verilog ./src/cardinal_router.v
+elaborate cardinal_router
 analyze -format verilog ./src/cardinal_ring.v
 elaborate cardinal_ring
 analyze -format verilog ./src/cardinal_nic.v
 elaborate cardinal_nic
+
 
 # Setting $design_name as current working design.
 # Use this command before setting any constraints.
@@ -82,7 +83,8 @@ uniquify ;
 # This command checks whether your design can be compiled
 link ;
 
-create_clock -name clk -period 4.0 -waveform [list 0 2] [get_ports clk]
+# Create a clock with period of 5.
+create_clock -name clk -period 2.4 -waveform [list 0 1.2] [get_ports clk]
 
 # start with a large clock period e.g 100
 # then try shorter period until find minimum period
@@ -97,6 +99,15 @@ set_input_delay -max 1.0 -clock clk [remove_from_collection [all_inputs] [get_po
 set_output_delay -max 1.0 -clock clk [all_outputs];
 
 set_clock_latency -source 0.5 [get_ports clk];
+
+# Set these two lines as same as clock period
+# Or comment out these two lines
+
+
+# "check_design" checks the internal representation of the
+# current design for consistency and issues error and
+# warning messages as appropriate.
+check_design > report/$design_name.check_design ;
 
 # Perforing synthesis and optimization on the current_design.
 compile ;
@@ -124,6 +135,6 @@ write -format verilog -hierarchy -out netlist/${design_name}_syn.v ;
 
 # Writing Standard Delay Format (SDF) back-annotation file.
 # This delay information can be used for post-synthesis simulation.
-write_sdf netlist/${design_name}_syn.sdf;
-write_sdc netlist/${design_name}_syn.sdc
+write_sdf netlist/$design_name.sdf;
+write_sdc netlist/$design_name.sdc
 

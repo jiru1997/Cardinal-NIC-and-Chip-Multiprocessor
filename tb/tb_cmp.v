@@ -245,7 +245,7 @@ begin
 		$fdisplay(dmem1_dump_file, "Memory location #%d : %h ", i, DM_node1.MEM[i]);
 		$fdisplay(dmem2_dump_file, "Memory location #%d : %h ", i, DM_node2.MEM[i]);
 		$fdisplay(dmem3_dump_file, "Memory location #%d : %h ", i, DM_node3.MEM[i]);
-		$fdisplay(imem0_dump_file, "Memory location #%d : %h ", i, IM_node0.MEM[i]);
+		$fdisplay(imem0_dump_file, "Memory location #%d : %h ", i, IM_node0.MEM[i]); // For debug
 		$fdisplay(imem1_dump_file, "Memory location #%d : %h ", i, IM_node1.MEM[i]);
 		$fdisplay(imem2_dump_file, "Memory location #%d : %h ", i, IM_node2.MEM[i]);
 		$fdisplay(imem3_dump_file, "Memory location #%d : %h ", i, IM_node3.MEM[i]);
@@ -263,6 +263,8 @@ begin
 	
 end // initial begin
 
+
+//For Debug
 initial begin
 	pc0_dump_file = $fopen("pc0.dump","w");
 	$fmonitor(pc0_dump_file,"time = %t, clk = %b, pc = %b , instruction = %h",$realtime, CLK, node0_pc_out,node0_inst_in);
