@@ -280,7 +280,7 @@ initial begin
 end
 
 initial begin
-	$sdf_annotate("./netlist/cardinal_cmp.sdf", CMP,,"sdf.log","MAXIMUM","1.0:1.0:1.0", "FROM_MAXIMUM");
+	$sdf_annotate("./netlist/cardinal_cmp_pnr.sdf", CMP,,"sdf.log","MAXIMUM","1.0:1.0:1.0", "FROM_MAXIMUM");
 	$enable_warnings;
 	$log("ncsim.log");
 end
