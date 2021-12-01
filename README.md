@@ -11,3 +11,5 @@ phase5: report<br>
 
 
 [proj_p4.pdf](https://github.com/jiru1997/Cardinal-NIC-and-Chip-Multiprocessor-/files/7558659/proj_p4.pdf)
+
+[final_report.pdf](https://github.com/jiru1997/Cardinal-NIC-and-Chip-Multiprocessor/files/7636078/final_report.pdf)
