@@ -1,7 +1,7 @@
 # Cardinal-NIC-and-Chip-Multiprocessor
 Cardinal NIC and Chip Multiprocessor
 
-phase1: design NIC and router ring<br>
+phase1: design NIC ( https://github.com/jiru1997/Cardinal_NIC ) and router ring ( https://github.com/jiru1997/Cardinal_router ) <br>
 phase2: design processor<br>
 phase3: integrate processor, router and NIC to get a multiprocessor<br>
 phase4: synthesis, static timing analysis, automatic place and route, logic equivalence verification<br>
